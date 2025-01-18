@@ -14,6 +14,8 @@ class UserDetailViewController: UIViewController {
     private let emailLabel = UILabel()
     private let phoneLabel = UILabel()
     private let websiteLabel = UILabel()
+    private let addressLabel = UILabel()
+    private let companyLabel = UILabel()
     
     init(viewModel: UserDetailViewModel) {
         self.viewModel = viewModel
@@ -26,6 +28,13 @@ class UserDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "userDetailView"
+        nameLabel.accessibilityIdentifier = "nameLabel"
+        emailLabel.accessibilityIdentifier = "emailLabel"
+        phoneLabel.accessibilityIdentifier = "phoneLabel"
+        websiteLabel.accessibilityIdentifier = "websiteLabel"
+        addressLabel.accessibilityIdentifier = "addressLabel"
+        companyLabel.accessibilityIdentifier = "companyLabel"
         setupUI()
         fetchUserDetails()
     }
@@ -38,7 +47,7 @@ class UserDetailViewController: UIViewController {
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         
-        [nameLabel, emailLabel, phoneLabel, websiteLabel].forEach { label in
+        [nameLabel, emailLabel, phoneLabel, websiteLabel, addressLabel, companyLabel].forEach { label in
             label.numberOfLines = 0
             stackView.addArrangedSubview(label)
         }
@@ -70,6 +79,7 @@ class UserDetailViewController: UIViewController {
         emailLabel.text = "Email: \(user.email)"
         phoneLabel.text = "Phone: \(user.phone)"
         websiteLabel.text = "Website: \(user.website)"
+        addressLabel.text = "Address: \(user.address)"
+        companyLabel.text = "Company: \(user.company)"
     }
 }
-

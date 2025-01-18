@@ -22,6 +22,7 @@ class UserListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "userListView"
         setupUI()
         fetchUsers()
     }
@@ -33,6 +34,7 @@ class UserListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
+        tableView.accessibilityIdentifier = "userListTableView"
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +66,7 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
+        cell.accessibilityIdentifier = "userCell_\(indexPath.row)"
         let user = viewModel.user(at: indexPath.row)
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
@@ -78,4 +81,3 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
